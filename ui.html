@@ -16,12 +16,27 @@
     <script>
         let main = document.querySelector(".seat-container");
 
-        for (let x = 1; x <= 50; x++) {
+        const seatStatus = {
+            seat_01: 'available',
+            seat_02: 'available',
+            seat_03: 'available',
+            seat_04: 'available',
+            seat_05: 'available',
+            seat_06: 'available',
+            seat_07: 'available',
+            seat_08: 'available',
+            seat_09: 'available',
+            seat_10: 'available',
+        }
+
+        let turappu = Object.keys(seatStatus);
+
+        for (let x = 1; x <= 10; x++) {
 
             let inputBtn = document.createElement("input");
             inputBtn.setAttribute('type', 'button');
             inputBtn.setAttribute('id', `btn-${x}`);
-            inputBtn.setAttribute('value', `Seat ${x} is available`);
+            inputBtn.setAttribute('value', `Seat ${x} is ${seatStatus[turappu[x-1]]}`);
 
 
 
@@ -37,15 +52,17 @@
             inputBtn.addEventListener('click', function (e) {
 
                 if (e.target.value.indexOf("available") < 0) {
+                  
                     alert("The book is already booked");
                 }
 
 
 
                 else {
-                    e.target.value = `Seat ${x} is booked`;  // ✅ Change same button
+                    let filtered = seatStatus[turappu[x-1]]
+                    e.target.value = `Seat ${x} is ${filtered}`;  // ✅ Change same button
                     e.target.style.backgroundColor = 'red';  // ✅ Same button
-                    e.target.disabled = true;                // ✅ Same button
+                    // ✅ Same button
                     // ✅ Mark as booked
 
                     alert('You booked this seat');
