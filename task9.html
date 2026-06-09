@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload Validation</title>
+</head>
+<body>
+
+    <input type="file" id="fileInput">
+
+    <p id="message"></p>
+
+    <img id="imagePreview" width="300" style="display:none;">
+    
+    <video id="videoPreview" width="300" controls style="display:none;"></video>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const message = document.getElementById("message");
+        const imagePreview = document.getElementById("imagePreview");
+        const videoPreview = document.getElementById("videoPreview");
+
+        fileInput.addEventListener("change", () => {
+            const file = fileInput.file[0];
+
+            if (!file) return;
+
+            // Max 5 MB
+            const maxSize = 5 * 1024 * 1024;
+
+            // Hide previous previews
+            imagePreview.style.display = "none";
+            videoPreview.style.display = "none";
+
+            if (file.size > maxSize) {
+                message.textContent = "❌ File is too large. Maximum size is 5 MB.";
+                fileInput.value = "";
+                return;
+            }
+
+            if (file.type.startsWith("image/")) {
+                imagePreview.src = URL.createObjectURL(file);
+                imagePreview.style.display = "block";
+                message.textContent = "✅ Valid image. Ready to upload.";
+            }
+            else if (file.type.startsWith("video/")) {
+                videoPreview.src = URL.createObjectURL(file);
+                videoPreview.style.display = "block";
+                message.textContent = "✅ Valid video. Ready to upload.";
+            }
+            else {
+                message.textContent =
+                    "❌ Only image and video files are allowed.";
+                fileInput.value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>
