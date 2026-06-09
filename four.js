@@ -31,7 +31,7 @@ while (seatCount > 0) {
 
             else {
             console.log('The seat you tried to book has already booked by someone');
-        }
+            }
 
 
         }

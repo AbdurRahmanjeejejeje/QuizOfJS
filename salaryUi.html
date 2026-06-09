@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Status System</title>
+</head>
+<body>
+
+    <h1>Employee Status Management</h1>
+    
+    <div id="employees-container"></div>
+    
+    <div id="summary"></div>
+
+    <script>
+        const employeeStatus = {
+            emp_1: 'active',
+            emp_2: 'inactive',
+            emp_3: 'active',
+            emp_4: 'inactive',
+            emp_5: 'active',
+            emp_6: 'active',
+            emp_7: 'inactive',
+            emp_8: 'active',
+            emp_9: 'active',
+            emp_10: 'inactive',
+        };
+
+        let keys = Object.keys(employeeStatus);
+        let totalExpense = 0;
+        let salary = 10000;
+        let countOfActive = 0;
+        let countOfInactive = 0;
+
+        // Get container
+        let container = document.getElementById('employees-container');
+        let summary = document.getElementById('summary');
+
+        // Loop through employees and create UI
+        for (let count = 0; count < keys.length; count++) {
+            let key = employeeStatus[keys[count]];
+            
+            // Create employee button
+            let empBtn = document.createElement('input');
+            empBtn.setAttribute('type', 'button');
+            empBtn.setAttribute('value', `Employee ${count + 1} - ${key}`);
+            
+            // Styling based on status
+            if (key === 'active') {
+                empBtn.style.backgroundColor = 'green';
+                countOfActive += 1;
+                totalExpense += salary;
+            } else {
+                empBtn.style.backgroundColor = 'red';
+                countOfInactive += 1;
+            }
+            
+            empBtn.style.color = 'white';
+            empBtn.style.padding = '10px 15px';
+            empBtn.style.margin = '5px';
+            empBtn.style.fontWeight = 'bold';
+            empBtn.style.border = 'none';
+            empBtn.style.cursor = 'pointer';
+            
+            container.append(empBtn);
+        }
+
+        // Display Summary
+        summary.innerHTML = `
+            <h2>Summary</h2>
+            <p><strong>Active Employees: </strong> ${countOfActive}</p>
+            <p><strong>Inactive Employees: </strong> ${countOfInactive}</p>
+            <p><strong>Total Salary Expense: </strong> Rs ${totalExpense}</p>
+        `;
+        
+        summary.style.marginTop = '30px';
+        summary.style.padding = '20px';
+        summary.style.backgroundColor = '#f0f0f0';
+        summary.style.borderRadius = '5px';
+
+    </script>
+
+</body>
+</html>

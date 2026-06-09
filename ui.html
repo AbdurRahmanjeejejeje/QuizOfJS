@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Booking System</title>
+</head>
+
+<body>
+
+    <h1>Seat Booking System</h1>
+
+    <div class="seat-container"></div>
+
+    <script>
+        let main = document.querySelector(".seat-container");
+
+        for (let x = 1; x <= 50; x++) {
+
+            let inputBtn = document.createElement("input");
+            inputBtn.setAttribute('type', 'button');
+            inputBtn.setAttribute('id', `btn-${x}`);
+            inputBtn.setAttribute('value', `Seat ${x} is available`);
+
+
+
+            // Initial styling
+            inputBtn.style.backgroundColor = 'green';
+            inputBtn.style.color = 'white';
+            inputBtn.style.padding = '10px 15px';
+            inputBtn.style.margin = '5px';
+            inputBtn.style.fontWeight = 'bold';
+            inputBtn.style.border = 'none';
+            inputBtn.style.cursor = 'pointer';
+
+            inputBtn.addEventListener('click', function (e) {
+
+                if (e.target.value.indexOf("available") < 0) {
+                    alert("The book is already booked");
+                }
+
+
+
+                else {
+                    e.target.value = `Seat ${x} is booked`;  // ✅ Change same button
+                    e.target.style.backgroundColor = 'red';  // ✅ Same button
+                    e.target.disabled = true;                // ✅ Same button
+                    // ✅ Mark as booked
+
+                    alert('You booked this seat');
+                }
+
+            });
+
+            main.append(inputBtn);
+        }
+    </script>
+
+</body>
+
+</html>
